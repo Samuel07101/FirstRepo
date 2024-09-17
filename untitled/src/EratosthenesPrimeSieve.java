@@ -1,38 +1,46 @@
-public class EratosthenesPrimeSieve implements PrimeSieve{
+ public class EratosthenesPrimeSieve implements PrimeSieve{
 
     private int obergrenze;
+    private Boolean[] gestrichen;
 
     public EratosthenesPrimeSieve(int obergrenze) {
         this.obergrenze = obergrenze;
+        gestrichen = new Boolean[obergrenze+1];
+
+        for (int i = 0; i <=obergrenze;i++){
+            gestrichen[i] = true;
+        }
+        sieb();
     }
 
-    @Override
-    public boolean isPrime(int p) {
-        if(p < 2){
-            return false;
-        } else if (p == 2) {
-            return true;
-        }else if(p%2 == 0){
-            return false;
-        }else{
-            for (int i = 3;i <= Math.sqrt(p);i += 2){
-                if(p%i == 0){
-                    return false;
+    public void sieb(){
+        gestrichen[0] = false;
+        gestrichen[1] = false;
+        for(int i = 2;i <= Math.sqrt(obergrenze);i++){
+            if(gestrichen[i]){
+                for (int j = i*i;j <= obergrenze; j+= i){
+                    gestrichen[j] = false;
                 }
             }
         }
-
-        return true;
     }
 
-    @Override
-    public void printPrimes() {
-        for(int i = 0;i <= obergrenze;i++){
+
+
+
+     @Override
+     public boolean isPrime(int p) {
+         return gestrichen[p];
+     }
+
+
+
+     @Override
+     public void printPrimes() {
+        for (int i = 0;i <= obergrenze;i++){
             if(isPrime(i)){
                 System.out.println(i);
             }
         }
-    }
-
-
-}
+     }
+ }
