@@ -22,7 +22,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve{
             }
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -34,5 +34,5 @@ public class EratosthenesPrimeSieve implements PrimeSieve{
         }
     }
 
-    
+
 }
